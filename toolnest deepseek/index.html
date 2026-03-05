@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolNest - Student, PDF & Writing Tools</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ToolNest<span class="logo-dot">.</span></a>
+            
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="all-tools.html">All Tools</a></li>
+                <li><a href="student-tools.html">Student</a></li>
+                <li><a href="pdf-tools.html">PDF</a></li>
+                <li><a href="writing-tools.html">Writing</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+            
+            <!-- Search + Dark Mode -->
+            <div class="nav-actions">
+                <div class="search-box">
+                    <span class="material-icons">search</span>
+                    <input type="text" id="globalSearch" placeholder="Search tools...">
+                    <div id="searchResults" class="search-dropdown"></div>
+                </div>
+                <button id="darkModeToggle" class="icon-btn">
+                    <span class="material-icons">dark_mode</span>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>All the tools you need<span class="highlight">. Free.</span></h1>
+            <p>Student tools, PDF editors, writing assistants - all in one place</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalTools">0</span>
+                    <span class="stat-label">Free Tools</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="todayUsers">0</span>
+                    <span class="stat-label">Active Today</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Tools -->
+        <section class="featured">
+            <h2>Popular Tools</h2>
+            <div class="tool-grid" id="featuredTools"></div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories">
+            <h2>Browse by Category</h2>
+            <div class="category-grid">
+                <a href="student-tools.html" class="category-card">
+                    <span class="material-icons category-icon">school</span>
+                    <h3>Student Tools</h3>
+                    <p>GPA calculator, Pomodoro, Citation generator</p>
+                </a>
+                <a href="pdf-tools.html" class="category-card">
+                    <span class="material-icons category-icon">picture_as_pdf</span>
+                    <h3>PDF Tools</h3>
+                    <p>Merge, split, reorder pages</p>
+                </a>
+                <a href="writing-tools.html" class="category-card">
+                    <span class="material-icons category-icon">edit</span>
+                    <h3>Writing Tools</h3>
+                    <p>Summarizer, word counter, outline builder</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 ToolNest. All tools run in your browser - no data leaves your device.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="updates.html">Updates</a>
+                <a href="#">Report Issue</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
