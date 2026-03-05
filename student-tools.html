@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tools - ToolNest</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ToolNest<span class="logo-dot">.</span></a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="all-tools.html">All Tools</a></li>
+                <li><a href="student-tools.html" class="active">Student</a></li>
+                <li><a href="pdf-tools.html">PDF</a></li>
+                <li><a href="writing-tools.html">Writing</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <span class="material-icons">search</span>
+                    <input type="text" id="globalSearch" placeholder="Search tools..." autocomplete="off">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                <button id="darkModeToggle" class="icon-btn">
+                    <span class="material-icons">dark_mode</span>
+                </button>
+            </div>
+            <button class="mobile-menu-btn">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><span class="material-icons page-icon">school</span> Student Tools</h1>
+            <p>GPA calculators, study timers, flashcards, and academic helpers</p>
+        </div>
+    </div>
+
+    <div class="tools-container">
+        <!-- GPA Calculator -->
+        <div class="tool-card expanded" id="gpa">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">calculate</span>
+                    <h2>GPA Calculator</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_less</span>
+            </div>
+            <div class="tool-content">
+                <div class="gpa-calculator">
+                    <div class="info-box">
+                        <p><strong>How to use:</strong> Enter course name, credit hours, and select grade. Click "Calculate GPA" to see your results. Your calculations are automatically saved.</p>
+                    </div>
+
+                    <div class="gpa-options">
+                        <label>
+                            <input type="radio" name="gradingSystem" value="ghana" checked> 
+                            Ghana System (A=4.0, B=3.0, C=2.0, D=1.0, F=0.0)
+                        </label>
+                        <label>
+                            <input type="radio" name="gradingSystem" value="international"> 
+                            International (A=4.0, A-=3.7, B+=3.3, B=3.0, B-=2.7, C+=2.3, C=2.0, etc.)
+                        </label>
+                    </div>
+
+                    <div class="saved-gpas" id="savedGpas">
+                        <h3>Saved Calculations</h3>
+                        <div id="savedGpasList"></div>
+                    </div>
+
+                    <div id="courses-container">
+                        <!-- Courses will be added here dynamically -->
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="addCourse()">
+                        <span class="material-icons">add</span> Add Course
+                    </button>
+
+                    <div class="gpa-result">
+                        <h3>Your GPA: <span id="gpa-value">0.00</span></h3>
+                        <p>Total Credits: <span id="total-credits">0</span></p>
+                        <p>Total Grade Points: <span id="total-points">0.00</span></p>
+                    </div>
+
+                    <div class="gpa-actions">
+                        <button class="btn btn-primary" onclick="calculateGPA()">
+                            Calculate GPA
+                        </button>
+                        <button class="btn btn-secondary" onclick="saveGPACalculation()">
+                            <span class="material-icons">save</span> Save This Calculation
+                        </button>
+                        <button class="btn btn-secondary" onclick="saveSemester()"><span class="material-icons">bookmark_add</span> Save Semester</button>
+                        <button class="btn btn-secondary" onclick="openSavedSemesters()"><span class="material-icons">folder</span> View Saved</button>
+                        <button class="btn btn-secondary" onclick="loadLastGPACalculation()">
+                            <span class="material-icons">history</span> Load Last Saved
+                        </button>
+                    </div>
+
+                    <button class="favorite-toggle" onclick="toggleFavorite(1)">
+                        <span class="material-icons" id="fav-1">star_border</span> Save to Favorites
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pomodoro Timer -->
+        <div class="tool-card" id="pomodoro">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">timer</span>
+                    <h2>Pomodoro Timer</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="pomodoro-timer">
+                    <div class="timer-display">
+                        <span id="minutes">25</span>:<span id="seconds">00</span>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" onclick="startTimer()" id="startBtn">Start</button>
+                        <button class="btn btn-secondary" onclick="pauseTimer()" id="pauseBtn" disabled>Pause</button>
+                        <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+                    </div>
+
+                    <div class="timer-modes">
+                        <button class="mode-btn active" onclick="setMode(25, 'pomodoro')" id="mode-pomodoro">Pomodoro (25min)</button>
+                        <button class="mode-btn" onclick="setMode(5, 'shortBreak')" id="mode-short">Short Break (5min)</button>
+                        <button class="mode-btn" onclick="setMode(15, 'longBreak')" id="mode-long">Long Break (15min)</button>
+                    </div>
+
+                    <div class="session-counter">
+                        <span id="sessionCount">0</span> pomodoros completed today
+                    </div>
+
+                    <div class="timer-settings">
+                        <h4>Customize Timer</h4>
+                        <div class="settings-row">
+                            <label>
+                                Pomodoro (min):
+                                <input type="number" id="customPomodoro" min="1" max="60" value="25" onchange="updateCustomTimer()">
+                            </label>
+                            <label>
+                                Short Break (min):
+                                <input type="number" id="customShortBreak" min="1" max="30" value="5" onchange="updateCustomTimer()">
+                            </label>
+                            <label>
+                                Long Break (min):
+                                <input type="number" id="customLongBreak" min="1" max="60" value="15" onchange="updateCustomTimer()">
+                            </label>
+                        </div>
+                        <button class="btn btn-secondary" onclick="applyCustomTimer()">Apply Custom Times</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <div class="tool-card" id="converter">
+        <div class="tool-header" onclick="toggleTool(this)">
+        <div class="tool-title">
+        <span class="material-icons tool-icon">swap_horiz</span>
+        <h2>Grade Converter</h2>
+        </div>
+        <span class="material-icons expand-icon">expand_more</span>
+        </div>
+        <div class="tool-content" style="display:none;">
+        <div class="gpa-calculator">
+        <p class="field-hint">Enter a percentage score to get the letter grade and grade point (Ghana system).</p>
+        <div class="field" style="max-width:260px;">
+        <label>Percentage (0–100)</label>
+        <input id="percent-input" max="100" min="0" placeholder="e.g., 78" type="number"/>
+        </div>
+        <div class="btn-row">
+        <button class="btn btn-primary" onclick="convertGrade()">Convert</button>
+        <button class="btn btn-secondary" onclick="clearGradeConvert()">Clear</button>
+        </div>
+        <div class="result-box" id="convert-result" style="display:none;">
+        <h3>Result</h3>
+        <p><b>Letter:</b> <span id="convert-letter">-</span></p>
+        <p><b>Grade Point:</b> <span id="convert-gp">-</span></p>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- Citation Generator -->
+        <div class="tool-card" id="citation">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">format_quote</span>
+                    <h2>Citation Generator</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="citation-generator">
+                    <div class="citation-style">
+                        <label>Citation Style:</label>
+                        <select id="citation-style">
+                            <option value="apa">APA 7th Edition</option>
+                            <option value="mla">MLA 9th Edition</option>
+                            <option value="chicago">Chicago Manual of Style</option>
+                            <option value="harvard">Harvard</option>
+                        </select>
+                    </div>
+
+                    <div class="citation-type">
+                        <label>Source Type:</label>
+                        <select id="citation-source" onchange="toggleCitationFields()">
+                            <option value="book">Book</option>
+                            <option value="website">Website</option>
+                            <option value="journal">Journal Article</option>
+                            <option value="video">Online Video</option>
+                            <option value="newspaper">Newspaper Article</option>
+                        </select>
+                    </div>
+
+                    <div id="book-fields" class="citation-fields">
+                        <input type="text" id="author" placeholder="Author(s) - Last, First Initial (e.g., Smith, J.)">
+                        <input type="text" id="year" placeholder="Publication Year (e.g., 2024)">
+                        <input type="text" id="title" placeholder="Book Title">
+                        <input type="text" id="publisher" placeholder="Publisher">
+                        <input type="text" id="edition" placeholder="Edition (if not first)">
+                    </div>
+
+                    <div id="website-fields" class="citation-fields" style="display: none;">
+                        <input type="text" id="web-author" placeholder="Author(s)">
+                        <input type="text" id="web-date" placeholder="Publication Date (e.g., 2024, Jan 15)">
+                        <input type="text" id="web-title" placeholder="Page Title">
+                        <input type="text" id="site-name" placeholder="Website Name">
+                        <input type="url" id="web-url" placeholder="URL">
+                        <input type="text" id="access-date" placeholder="Access Date (e.g., 2024, Mar 4)">
+                    </div>
+
+                    <div id="journal-fields" class="citation-fields" style="display: none;">
+                        <input type="text" id="journal-author" placeholder="Author(s)">
+                        <input type="text" id="journal-year" placeholder="Year">
+                        <input type="text" id="article-title" placeholder="Article Title">
+                        <input type="text" id="journal-name" placeholder="Journal Name">
+                        <input type="text" id="volume" placeholder="Volume">
+                        <input type="text" id="issue" placeholder="Issue (if applicable)">
+                        <input type="text" id="pages" placeholder="Page Range (e.g., 123-145)">
+                        <input type="text" id="doi" placeholder="DOI (if available)">
+                    </div>
+
+                    <div id="video-fields" class="citation-fields" style="display: none;">
+                        <input type="text" id="video-creator" placeholder="Creator/Uploader">
+                        <input type="text" id="video-date" placeholder="Upload Date">
+                        <input type="text" id="video-title" placeholder="Video Title">
+                        <input type="text" id="platform" placeholder="Platform (e.g., YouTube)">
+                        <input type="url" id="video-url" placeholder="URL">
+                    </div>
+
+                    <div id="newspaper-fields" class="citation-fields" style="display: none;">
+                        <input type="text" id="news-author" placeholder="Author(s)">
+                        <input type="text" id="news-date" placeholder="Publication Date">
+                        <input type="text" id="news-title" placeholder="Article Title">
+                        <input type="text" id="newspaper-name" placeholder="Newspaper Name">
+                        <input type="text" id="pages" placeholder="Page(s)">
+                        <input type="url" id="news-url" placeholder="URL (if online)">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="generateCitation()">Generate Citation</button>
+
+                    <div class="citation-result" id="citation-result" style="display: none;">
+                        <!-- Citation will appear here -->
+                    </div>
+
+                    <div class="citation-actions" id="citation-actions" style="display: none;">
+                        <button class="btn btn-secondary" onclick="copyCitation()">
+                            <span class="material-icons">content_copy</span> Copy to Clipboard
+                        </button>
+                        <button class="btn btn-secondary" onclick="saveCitation()">
+                            <span class="material-icons">bookmark</span> Save Citation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Flashcard Generator -->
+        <div class="tool-card" id="flashcards">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">style</span>
+                    <h2>Flashcard Generator</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="flashcard-tool">
+                    <div class="flashcard-setup">
+                        <h3>Create Flashcards</h3>
+                        <div class="flashcard-input-area">
+                            <input type="text" id="flashcard-topic" placeholder="Topic/Subject">
+                            <textarea id="flashcard-content" placeholder="Enter terms and definitions (one per line, format: term: definition)"></textarea>
+                            <small>Example: Photosynthesis: Process plants use to convert sunlight into energy</small>
+                        </div>
+                        <button class="btn btn-primary" onclick="generateFlashcards()">Generate Flashcards</button>
+                    </div>
+
+                    <div id="flashcards-container" class="flashcards-container" style="display: none;">
+                        <div class="flashcard-controls">
+                            <button class="btn btn-secondary" onclick="shuffleFlashcards()">Shuffle</button>
+                            <button class="btn btn-secondary" onclick="resetFlashcards()">Reset</button>
+                        </div>
+                        <div id="flashcards-grid" class="flashcards-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Study Schedule Planner -->
+        <div class="tool-card" id="study-planner">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">calendar_month</span>
+                    <h2>Study Schedule Planner</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="planner-tool">
+                    <div class="planner-inputs">
+                        <div class="input-group">
+                            <label>Exam/Test Date:</label>
+                            <input type="date" id="exam-date">
+                        </div>
+                        <div class="input-group">
+                            <label>Hours Available Per Day:</label>
+                            <input type="number" id="hours-per-day" min="1" max="12" value="4">
+                        </div>
+                        <div class="input-group">
+                            <label>Subjects to Study (comma separated):</label>
+                            <input type="text" id="subjects" placeholder="e.g., Math, Physics, Chemistry">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateStudyPlan()">Generate Study Plan</button>
+                    
+                    <div id="study-plan-result" class="study-plan-result" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 ToolNest. All tools run in your browser.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="updates.html">Updates</a>
+                <a href="help.html#report-bug">Report Issue</a>
+            </div>
+        </div>
+    </footer>
+<!-- Saved GPA/CGPA Modal -->
+    <div class="modal" id="savedSemestersModal" style="display:none;">
+    <div class="modal-content" style="max-width:900px;">
+    <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+    <h2 style="display:flex;gap:.5rem;align-items:center;"><span class="material-icons">bookmark</span> Saved Semesters</h2>
+    <button aria-label="Close" class="icon-btn" onclick="closeSavedSemesters()"><span class="material-icons">close</span></button>
+    </div>
+    <div id="savedSemestersList"></div>
+    <div style="display:flex;gap:.75rem;justify-content:flex-end;margin-top:1rem;">
+    <button class="btn btn-secondary" onclick="exportSavedSemesters()">Export (JSON)</button>
+    <button class="btn btn-secondary" onclick="clearSavedSemesters()">Clear Saved</button>
+    </div>
+    </div>
+    </div>
+
+<script src="js/storage.js"></script>
+    <script src="js/student-tools.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

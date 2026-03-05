@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - ToolNest</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ToolNest<span class="logo-dot">.</span></a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="all-tools.html">All Tools</a></li>
+                <li><a href="student-tools.html">Student</a></li>
+                <li><a href="pdf-tools.html">PDF</a></li>
+                <li><a href="writing-tools.html">Writing</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="help.html" class="active">Help</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <span class="material-icons">search</span>
+                    <input type="text" id="globalSearch" placeholder="Search tools..." autocomplete="off">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                <button id="darkModeToggle" class="icon-btn">
+                    <span class="material-icons">dark_mode</span>
+                </button>
+            </div>
+            <button class="mobile-menu-btn">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><span class="material-icons page-icon">help</span> Help Center</h1>
+            <p>How to use ToolNest, FAQs, tutorials, and support</p>
+        </div>
+    </div>
+
+    <main class="help-page">
+        <div class="container">
+<div class="help-grid">
+                <!-- Quick Start Guide -->
+                <div class="help-section">
+                    <h2>🚀 Quick Start Guide</h2>
+                    <div class="guide-steps">
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h3>Choose a Tool</h3>
+                                <p>Browse tools by category or use the search bar to find what you need.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h3>Use the Tool</h3>
+                                <p>All tools work directly in your browser. No installation or uploads needed.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h3>Save Your Work</h3>
+                                <p>Click the star to save favorites. Your data is stored locally in your browser.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h3>Access Dashboard</h3>
+                                <p>View your favorites, history, and settings in your personal dashboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="help-section">
+                    <h2>❓ Frequently Asked Questions</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Is ToolNest really free?</span>
+                            <span class="material-icons">expand_more</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! ToolNest is completely free. All tools run in your browser - no server costs, no hidden fees, no subscriptions. We believe in providing free, accessible tools for everyone.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Are my files and data safe?</span>
+                            <span class="material-icons">expand_more</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely. All processing happens locally in your browser. We never upload your files to any server. Your PDFs, text, and personal data never leave your device. Once you close the page, your files are gone from memory.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Do I need to create an account?</span>
+                            <span class="material-icons">expand_more</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No account needed! Your favorites, settings, and history are saved locally in your browser using localStorage. You can start using tools immediately without any sign-up.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What happens if I clear my browser data?</span>
+                            <span class="material-icons">expand_more</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Your favorites, settings, and history are stored in your browser's localStorage. If you clear browser data (cache, cookies, site data), they'll be reset. We recommend:</p>
+                            <ul>
+                                <li>Export your data from Dashboard → Settings before clearing browser data</li>
+                                <li>Keep a backup of important calculations or citations</li>
+                                <li>Use the export feature to save your data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Can I use tools offline?</span>
+                            <span class="material-icons">expand_more</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Currently, you need an internet connection to load the website. However, once loaded, most tools work offline. We're working on making ToolNest a Progressive Web App (PWA) for full offline functionality.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Why aren't my PDF tools working?</span>
+                            <span class="material-icons">expand_more</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>PDF tools require modern browsers with JavaScript enabled. If they're not working:</p>
+                            <ul>
+                                <li>Update your browser to the latest version</li>
+                                <li>Make sure you're not in private/incognito mode (limits localStorage)</li>
+                                <li>Check that JavaScript is enabled</li>
+                                <li>Try with smaller PDF files (under 50MB)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How-to Guides -->
+                <div class="help-section">
+                    <h2>📘 How-to Guides</h2>
+                    
+                    <div class="guide-item">
+                        <h3>📊 Using the GPA Calculator</h3>
+                        <ol>
+                            <li>Select your grading system (Ghana or International)</li>
+                            <li>Click "Add Course" for each class</li>
+                            <li>Enter course name, credit hours, and select grade</li>
+                            <li>Click "Calculate GPA" to see your results</li>
+                            <li>Click "Save This Calculation" to store it</li>
+                            <li>Access saved calculations from your Dashboard</li>
+                        </ol>
+                        <p class="tip">💡 <strong>Tip:</strong> Your GPA calculations are automatically color-coded (green for excellent, red for failing).</p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>📄 Merging PDFs</h3>
+                        <ol>
+                            <li>Go to PDF Tools and select "Merge PDF"</li>
+                            <li>Drag and drop PDF files or click to browse</li>
+                            <li>Arrange files by dragging them in the list</li>
+                            <li>Click "Merge PDFs" and wait for processing</li>
+                            <li>Download your merged PDF</li>
+                        </ol>
+                        <p class="tip">💡 <strong>Tip:</strong> You can merge up to 10 files at once. All processing happens in your browser.</p>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>✍️ Using the Grammar Checker</h3>
+                        <ol>
+                            <li>Go to Writing Tools and select "Grammar & Spell Checker"</li>
+                            <li>Paste or type your text</li>
+                            <li>Click "Check Grammar"</li>
+                            <li>Review highlighted issues and suggestions</li>
+                            <li>Click "Apply Suggestions" to fix automatically</li>
+                            <li>Copy or download the corrected text</li>
+                        </ol>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>⭐ Saving Favorites</h3>
+                        <ol>
+                            <li>Click the star icon on any tool card</li>
+                            <li>The star will turn yellow when saved</li>
+                            <li>Access all favorites in your Dashboard</li>
+                            <li>Click the star again to remove from favorites</li>
+                        </ol>
+                    </div>
+
+                    <div class="guide-item">
+                        <h3>📱 Using on Mobile</h3>
+                        <ol>
+                            <li>ToolNest is fully responsive - works on phones and tablets</li>
+                            <li>Use the mobile menu (☰) to navigate</li>
+                            <li>Tools are optimized for touch screens</li>
+                            <li>For PDF tools, files are processed on your device</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Tool-Specific Help -->
+                <div class="help-section" id="tool-help-form">
+                    <h2>🛠️ Tool-Specific Help</h2>
+                    <p>Tell us what tool is giving you trouble and what happened. We’ll route it to the right place.</p>
+
+                    <form class="tool-help-form" id="toolHelpForm" onsubmit="submitToolHelp(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="toolHelpCategory">Category</label>
+                                <select id="toolHelpCategory" required>
+                                    <option value="">Select a category</option>
+                                    <option value="student">Student Tools</option>
+                                    <option value="pdf">PDF Tools</option>
+                                    <option value="writing">Writing Tools</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="toolHelpName">Tool name</label>
+                                <input type="text" id="toolHelpName" placeholder="e.g., Merge PDF, GPA Calculator" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="toolHelpEmail">Your email (optional)</label>
+                                <input type="email" id="toolHelpEmail" placeholder="name@example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="toolHelpDevice">Device / browser (optional)</label>
+                                <input type="text" id="toolHelpDevice" placeholder="e.g., Android Chrome">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="toolHelpMessage">What’s the problem?</label>
+                            <textarea id="toolHelpMessage" rows="5" required placeholder="Describe what you clicked and what happened..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="button" class="btn btn-secondary" onclick="location.href=\'help.html#report-bug\';">Report as a bug</button>
+                        </div>
+
+                        <p class="form-hint">Tip: If a tool shows “nothing happens”, mention which button you pressed.</p>
+                    </form>
+                </div>
+
+                <!-- Contact & Support -->
+                <div class="help-section">
+                    <h2>📞 Contact & Support</h2>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <span class="material-icons">email</span>
+                            <div>
+                                <h3>Email Support</h3>
+                                <p><a href="mailto:support@toolnest.com">support@toolnest.com</a></p>
+                                <small>We'll respond within 24-48 hours</small>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <span class="material-icons">bug_report</span>
+                            <div>
+                                <h3 id="report-bug">Report a Bug</h3>
+                                <p>Use the form below and we’ll save your report on this device.</p>
+<form id="report-bug-form" class="tool-help-form" onsubmit="submitBugReport(event)">
+  <div class="form-group">
+    <label for="bugName">Your Name (optional)</label>
+    <input type="text" id="bugName" placeholder="e.g., Nana Yaa">
+  </div>
+  <div class="form-group">
+    <label for="bugEmail">Your Email (optional)</label>
+    <input type="email" id="bugEmail" placeholder="For follow-up">
+  </div>
+  <div class="form-group">
+    <label for="bugType">Issue Type</label>
+    <select id="bugType" required>
+      <option value="">Select issue type</option>
+      <option>Tool not working</option>
+      <option>Broken link / Navigation</option>
+      <option>Design / Layout</option>
+      <option>Performance</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="bugTool">Related Tool (optional)</label>
+    <input type="text" id="bugTool" placeholder="e.g., Merge PDF, CGPA Calculator">
+  </div>
+  <div class="form-group">
+    <label for="bugMsg">Description</label>
+    <textarea id="bugMsg" rows="5" placeholder="What happened? What did you expect?" required></textarea>
+  </div>
+  <button class="btn primary" type="submit">Submit Report</button>
+</form>
+                                <small>Help us improve ToolNest</small>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <span class="material-icons">lightbulb</span>
+                            <div>
+                                <h3>Feature Request</h3>
+                                <p><a href="#send-message">Suggest an Idea</a></p>
+                                <small>What tools would you like to see?</small>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <span class="material-icons">forum</span>
+                            <div>
+                                <h3>Community</h3>
+                                <p><a href="#" onclick="openCommunity()">Join Discussion</a></p>
+                                <small>Connect with other users</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Contact Form -->
+                    <div class="contact-form">
+                        <h3 id="send-message">Send us a message</h3>
+                        <form id="quickContactForm" onsubmit="sendQuickMessage(event)">
+                            <input type="text" placeholder="Your name" id="contact-name" required>
+                            <input type="email" placeholder="Your email" id="contact-email" required>
+                            <select id="contact-subject" required>
+                                <option value="">Select subject</option>
+                                <option value="question">Question</option>
+                                <option value="bug">Bug Report</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <textarea placeholder="Your message" rows="4" id="contact-message" required></textarea>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="material-icons">send</span> Send Message
+                            </button>
+                        </form>
+                        <small>This will open your default email app</small>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div class="help-section">
+                    <h2>🔧 Troubleshooting</h2>
+                    
+                    <div class="troubleshooting-item">
+                        <h3>Tools not loading?</h3>
+                        <ul>
+                            <li>Refresh the page</li>
+                            <li>Clear browser cache</li>
+                            <li>Disable browser extensions temporarily</li>
+                            <li>Try in incognito/private mode</li>
+                            <li>Update your browser to latest version</li>
+                        </ul>
+                    </div>
+
+                    <div class="troubleshooting-item">
+                        <h3>PDF tools not working?</h3>
+                        <ul>
+                            <li>Make sure files are valid PDFs (not corrupted)</li>
+                            <li>Try with smaller files (under 50MB)</li>
+                            <li>Check that JavaScript is enabled</li>
+                            <li>Some browsers have PDF limitations in private mode</li>
+                            <li>Try a different browser (Chrome, Firefox recommended)</li>
+                        </ul>
+                    </div>
+
+                    <div class="troubleshooting-item">
+                        <h3>Lost your saved data?</h3>
+                        <ul>
+                            <li>Check if you cleared browser history/cache</li>
+                            <li>Look for export files you might have saved</li>
+                            <li>Check different browser profiles</li>
+                            <li>Data cannot be recovered once cleared</li>
+                        </ul>
+                        <p class="warning">⚠️ Always export important data from Dashboard → Settings</p>
+                    </div>
+                </div>
+
+                <!-- About ToolNest -->
+                <div class="help-section">
+                    <h2>ℹ️ About ToolNest</h2>
+                    <div class="about-content">
+                        <p><strong>ToolNest</strong> is a collection of free, browser-based tools designed for students, writers, and professionals. All tools run entirely in your browser - no files are uploaded to any server.</p>
+                        
+                        <h3>Our Mission</h3>
+                        <p>To provide accessible, privacy-focused tools that help people work more efficiently without compromising their data security.</p>
+                        
+                        <h3>Technology</h3>
+                        <ul>
+                            <li>HTML5, CSS3, Vanilla JavaScript</li>
+                            <li>PDF.js and PDF-Lib for PDF processing</li>
+                            <li>LocalStorage for user preferences</li>
+                            <li>No backend servers - 100% client-side</li>
+                        </ul>
+                        
+                        <h3>Version</h3>
+                        <p>Current version: <strong>2.0.0</strong> (March 2026)</p>
+                        <p><a href="updates.html">View Changelog</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 ToolNest. All tools run in your browser.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="updates.html">Updates</a>
+                <a href="help.html#report-bug">Report Issue</a>
+            </div>
+        </div>
+    </footer>
+<script src="js/storage.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.material-icons');
+            
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                icon.textContent = 'expand_more';
+            } else {
+                // Close other open FAQs
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    if (ans !== answer) {
+                        ans.style.display = 'none';
+                        ans.previousElementSibling.querySelector('.material-icons').textContent = 'expand_more';
+                    }
+                });
+                
+                answer.style.display = 'block';
+                icon.textContent = 'expand_less';
+            }
+        }
+
+        function toggleToolHelp(element) {
+            const content = element.querySelector('.tool-help-content');
+            const icon = element.querySelector('.material-icons');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                icon.textContent = 'expand_more';
+            } else {
+                content.style.display = 'block';
+                icon.textContent = 'expand_less';
+            }
+        }
+
+        function searchHelp() {
+            const query = document.getElementById('helpSearch').value.toLowerCase();
+            const sections = document.querySelectorAll('.help-section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(query) || query === '') {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function sendQuickMessage(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            const mailtoLink = `mailto:support@toolnest.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\n\n${message}`
+            )}`;
+            
+            window.location.href = mailtoLink;
+        }
+
+        function openFeatureRequest() {
+            document.getElementById('contact-subject').value = 'feature';
+            document.getElementById('quickContactForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openCommunity() {
+            alert('Community features coming soon! For now, please use email support.');
+        }
+
+        // Initialize - close all tool help sections
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.tool-help-content').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

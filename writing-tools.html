@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Tools - ToolNest</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ToolNest<span class="logo-dot">.</span></a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="all-tools.html">All Tools</a></li>
+                <li><a href="student-tools.html">Student</a></li>
+                <li><a href="pdf-tools.html">PDF</a></li>
+                <li><a href="writing-tools.html" class="active">Writing</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <span class="material-icons">search</span>
+                    <input type="text" id="globalSearch" placeholder="Search tools..." autocomplete="off">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                <button id="darkModeToggle" class="icon-btn">
+                    <span class="material-icons">dark_mode</span>
+                </button>
+            </div>
+            <button class="mobile-menu-btn">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><span class="material-icons page-icon">edit</span> Writing Tools</h1>
+            <p>Grammar checker, summarizer, word counter, and writing assistants</p>
+        </div>
+    </div>
+
+    <div class="tools-container">
+        <!-- Grammar Checker (NEW) -->
+        <div class="tool-card expanded" id="grammar">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">spellcheck</span>
+                    <h2>Grammar & Spell Checker</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_less</span>
+            </div>
+            <div class="tool-content">
+                <div class="writing-tool">
+                    <div class="info-box">
+                        <p><strong>How to use:</strong> Type or paste your text below. The tool will highlight grammar errors, spelling mistakes, and suggest improvements.</p>
+                    </div>
+                    <textarea id="grammar-input" placeholder="Enter your text here to check for grammar and spelling errors..." rows="8"></textarea>
+                    
+                    <div class="grammar-controls">
+                        <button class="btn btn-primary" onclick="checkGrammar()">
+                            <span class="material-icons">check_circle</span> Check Grammar
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearGrammar()">
+                            <span class="material-icons">clear</span> Clear
+                        </button>
+                    </div>
+
+                    <div id="grammar-result" class="result-box" style="display: none;">
+                        <h3>Grammar Check Results</h3>
+                        <div id="grammar-issues"></div>
+                        <div id="grammar-suggestions"></div>
+                        <div class="grammar-actions">
+                            <button class="btn btn-secondary" onclick="applyGrammarFixes()">
+                                <span class="material-icons">auto_fix</span> Apply Suggestions
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyGrammarResult()">
+                                <span class="material-icons">content_copy</span> Copy Fixed Text
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Summarizer -->
+        <div class="tool-card" id="summarizer">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">summarize</span>
+                    <h2>AI Text Summarizer</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="writing-tool">
+                    <textarea id="summarize-input" placeholder="Paste your text here to summarize (minimum 50 words for best results)..." rows="8"></textarea>
+                    
+                    <div class="summarize-controls">
+                        <div class="control-group">
+                            <label>Summary Length:</label>
+                            <select id="summary-length">
+                                <option value="short">Short (25% of original)</option>
+                                <option value="medium" selected>Medium (50% of original)</option>
+                                <option value="long">Long (75% of original)</option>
+                                <option value="keypoints">Key Points Only (bullet points)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Summary Style:</label>
+                            <select id="summary-style">
+                                <option value="extractive">Extractive (uses original sentences)</option>
+                                <option value="abstractive" selected>Abstractive (rewrites for clarity)</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="summarizeText()">Summarize</button>
+                    </div>
+
+                    <div id="summary-result" class="result-box" style="display: none;">
+                        <h3>Summary</h3>
+                        <div id="summary-text"></div>
+                        <div class="summary-stats">
+                            <span id="original-length">0</span> words → 
+                            <span id="summary-length-count">0</span> words
+                            <span class="reduction-badge" id="reduction-percent">0% reduction</span>
+                        </div>
+                        <div class="summary-actions">
+                            <button class="btn btn-secondary" onclick="copySummary()">
+                                <span class="material-icons">content_copy</span> Copy Summary
+                            </button>
+                            <button class="btn btn-secondary" onclick="downloadSummary()">
+                                <span class="material-icons">download</span> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Word Counter (Improved) -->
+        <div class="tool-card" id="wordcounter">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">numbers</span>
+                    <h2>Advanced Word Counter</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="writing-tool">
+                    <textarea id="wordcount-input" placeholder="Type or paste your text here..." rows="8" oninput="updateWordCount()"></textarea>
+                    
+                    <div class="wordcount-detailed">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-value" id="word-count">0</span>
+                                <span class="stat-label">Words</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="char-count">0</span>
+                                <span class="stat-label">Characters</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="char-count-no-spaces">0</span>
+                                <span class="stat-label">Chars (no spaces)</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="sentence-count">0</span>
+                                <span class="stat-label">Sentences</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="paragraph-count">0</span>
+                                <span class="stat-label">Paragraphs</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="reading-time">0</span>
+                                <span class="stat-label">Reading Time (min)</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="speaking-time">0</span>
+                                <span class="stat-label">Speaking Time (min)</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="unique-words">0</span>
+                                <span class="stat-label">Unique Words</span>
+                            </div>
+                        </div>
+
+                        <div class="wordcount-tools">
+                            <button class="btn btn-secondary" onclick="clearText()">
+                                <span class="material-icons">clear</span> Clear
+                            </button>
+                            <button class="btn btn-secondary" onclick="copyText()">
+                                <span class="material-icons">content_copy</span> Copy Text
+                            </button>
+                            <button class="btn btn-secondary" onclick="downloadText()">
+                                <span class="material-icons">download</span> Download
+                            </button>
+                        </div>
+
+                        <div class="word-frequency" id="word-frequency" style="display: none;">
+                            <h4>Word Frequency</h4>
+                            <div id="frequency-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Essay Outline Builder (Improved) -->
+        <div class="tool-card" id="outline">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">format_list_bulleted</span>
+                    <h2>Essay Outline Builder</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="writing-tool">
+                    <div class="outline-form">
+                        <div class="form-group">
+                            <label>Essay Topic/Title:</label>
+                            <input type="text" id="essay-topic" placeholder="Enter your essay topic">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Essay Type:</label>
+                            <select id="essay-type" onchange="updateOutlineTemplate()">
+                                <option value="argumentative">Argumentative Essay</option>
+                                <option value="persuasive">Persuasive Essay</option>
+                                <option value="expository">Expository Essay</option>
+                                <option value="narrative">Narrative Essay</option>
+                                <option value="descriptive">Descriptive Essay</option>
+                                <option value="compare">Compare & Contrast</option>
+                                <option value="cause">Cause & Effect</option>
+                            </select>
+                        </div>
+                        
+                        <div class="outline-section">
+                            <label>Thesis Statement:</label>
+                            <textarea id="thesis-statement" placeholder="Enter your main thesis statement..." rows="3"></textarea>
+                        </div>
+
+                        <div class="outline-section">
+                            <label>Introduction Points:</label>
+                            <textarea id="intro-points" placeholder="Key points for introduction (one per line)..." rows="3"></textarea>
+                        </div>
+
+                        <div id="main-points">
+                            <label>Main Body Paragraphs:</label>
+                            <div class="point-input">
+                                <input type="text" class="point" placeholder="Main point 1">
+                                <button class="btn-icon" onclick="addSubPoint(this)" title="Add sub-point">
+                                    <span class="material-icons">add</span>
+                                </button>
+                                <button class="btn-icon" onclick="removeMainPoint(this)" title="Remove">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                                <div class="sub-points"></div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-secondary" onclick="addMainPoint()">
+                            <span class="material-icons">add</span> Add Main Point
+                        </button>
+
+                        <div class="outline-section">
+                            <label>Conclusion Points:</label>
+                            <textarea id="conclusion-points" placeholder="Key points for conclusion (one per line)..." rows="3"></textarea>
+                        </div>
+
+                        <div class="outline-section">
+                            <label>Sources/References:</label>
+                            <textarea id="sources" placeholder="List your sources (optional)..." rows="3"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="generateOutline()">
+                            <span class="material-icons">auto_awesome</span> Generate Outline
+                        </button>
+                    </div>
+
+                    <div id="outline-result" class="result-box" style="display: none;">
+                        <h3>Your Essay Outline</h3>
+                        <div id="outline-content" class="outline-content"></div>
+                        <div class="outline-actions">
+                            <button class="btn btn-secondary" onclick="copyOutline()">
+                                <span class="material-icons">content_copy</span> Copy Outline
+                            </button>
+                            <button class="btn btn-secondary" onclick="downloadOutline()">
+                                <span class="material-icons">download</span> Download
+                            </button>
+                            <button class="btn btn-secondary" onclick="exportToWord()">
+                                <span class="material-icons">description</span> Export to Word
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Paraphrasing Tool -->
+        <div class="tool-card" id="paraphrase">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">sync_alt</span>
+                    <h2>Paraphrasing Tool</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="writing-tool">
+                    <textarea id="paraphrase-input" placeholder="Enter text to paraphrase..." rows="6"></textarea>
+                    
+                    <div class="paraphrase-controls">
+                        <div class="control-group">
+                            <label>Paraphrase Level:</label>
+                            <select id="paraphrase-level">
+                                <option value="light">Light (synonym replacement)</option>
+                                <option value="medium" selected>Medium (sentence restructuring)</option>
+                                <option value="heavy">Heavy (complete rewriting)</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="paraphraseText()">
+                            <span class="material-icons">sync</span> Paraphrase
+                        </button>
+                    </div>
+
+                    <div id="paraphrase-result" class="result-box" style="display: none;">
+                        <h3>Paraphrased Text</h3>
+                        <div id="paraphrase-text"></div>
+                        <div class="paraphrase-actions">
+                            <button class="btn btn-secondary" onclick="copyParaphrase()">
+                                <span class="material-icons">content_copy</span> Copy
+                            </button>
+                            <button class="btn btn-secondary" onclick="acceptParaphrase()">
+                                <span class="material-icons">check_circle</span> Accept Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Readability Score -->
+        <div class="tool-card" id="readability">
+            <div class="tool-header" onclick="toggleTool(this)">
+                <div class="tool-title">
+                    <span class="material-icons tool-icon">analytics</span>
+                    <h2>Readability Score</h2>
+                </div>
+                <span class="material-icons expand-icon">expand_more</span>
+            </div>
+            <div class="tool-content" style="display: none;">
+                <div class="writing-tool">
+                    <textarea id="readability-input" placeholder="Paste your text to check readability..." rows="6"></textarea>
+                    
+                    <button class="btn btn-primary" onclick="checkReadability()">
+                        <span class="material-icons">analytics</span> Analyze
+                    </button>
+
+                    <div id="readability-result" class="result-box" style="display: none;">
+                        <h3>Readability Analysis</h3>
+                        <div class="readability-scores">
+                            <div class="score-card">
+                                <span class="score-label">Flesch Reading Ease</span>
+                                <span class="score-value" id="flesch-score">0</span>
+                                <span class="score-desc" id="flesch-desc"></span>
+                            </div>
+                            <div class="score-card">
+                                <span class="score-label">Flesch-Kincaid Grade</span>
+                                <span class="score-value" id="fk-grade">0</span>
+                                <span class="score-desc">Grade level</span>
+                            </div>
+                            <div class="score-card">
+                                <span class="score-label">Gunning Fog Index</span>
+                                <span class="score-value" id="fog-index">0</span>
+                                <span class="score-desc">Years of education needed</span>
+                            </div>
+                            <div class="score-card">
+                                <span class="score-label">Coleman-Liau Index</span>
+                                <span class="score-value" id="coleman-index">0</span>
+                                <span class="score-desc">Grade level</span>
+                            </div>
+                        </div>
+                        <div class="readability-recommendation" id="readability-recommendation"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 ToolNest. All tools run in your browser.</p>
+            <div class="footer-links">
+                <a href="help.html">Help</a>
+                <a href="updates.html">Updates</a>
+                <a href="help.html#report-bug">Report Issue</a>
+            </div>
+        </div>
+    </footer>
+<script src="js/storage.js"></script>
+    <script src="js/writing-tools.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
